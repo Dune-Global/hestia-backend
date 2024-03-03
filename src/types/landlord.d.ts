@@ -1,6 +1,7 @@
 import mongoose, {Document} from "mongoose";
 
 export interface ILandlord extends Document {
+  accountType: string;
   firstName: string;
   lastName: string;
   userName: string;

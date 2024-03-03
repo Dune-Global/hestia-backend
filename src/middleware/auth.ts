@@ -1,11 +1,11 @@
 import httpStatus from "http-status";
 import APIError from "../errors/api-error";
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
 import env from "../config/env";
-import { IAccessToken } from "../types";
+import { IAccessToken, AuthRequest } from "../types";
 
-export const isAuth = (req: Request, _res: Response, next: NextFunction) => {
+export const isAuth = (req: AuthRequest, _res: Response, next: NextFunction) => {
   const authorization = req.headers["authorization"];
   if (!authorization) {
     next(
@@ -30,6 +30,7 @@ export const isAuth = (req: Request, _res: Response, next: NextFunction) => {
       token!,
       env.accessTokenSecret!
     ) as IAccessToken;
+    req.user = payload;
     console.log(payload);
   } catch (err) {
     next(

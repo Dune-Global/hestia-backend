@@ -8,6 +8,7 @@ export const createAccessToken = (options: IAccessToken) => {
       id: options?.id,
       email: options?.email,
       isEmailVerified: options?.isEmailVerified,
+      accountType: options?.accountType,
     },
     env.accessTokenSecret!,
     {

@@ -4,3 +4,4 @@ export * from "./property/propertyAvailableGenders";
 export * from "./property/amenty";
 
 export * from "./sriLankanProvinces";
+export * from "./accountTypes";

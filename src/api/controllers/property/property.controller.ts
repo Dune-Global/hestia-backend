@@ -3,7 +3,8 @@ import APIError from "../../../errors/api-error";
 import Property from "../../../models/property.model";
 import Landlord from "../../../models/landlord.model";
 import httpStatus from "http-status";
-import { ITransformedProperty } from "../../../types";
+import { ITransformedProperty, AuthRequest } from "../../../types";
+import { checkLandlordAuthorization } from "../../../utils/jwt-auth/chechAccountType";
 
 // Create a new property
 export const createProperty = async (
@@ -39,11 +40,12 @@ export const listProperties = async (
 
 // Delete a property and delete the ID from the landlord's property list
 export const deleteProperty = async (
-  req: Request,
+  req: AuthRequest,
   res: Response,
   next: NextFunction
 ) => {
   try {
+    checkLandlordAuthorization(req.user!);
     const { propertyId } = req.params;
     const deletedProperty = await Property.findByIdAndDelete(propertyId);
 

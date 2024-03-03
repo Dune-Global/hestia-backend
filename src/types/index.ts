@@ -33,3 +33,6 @@ export { IAccountActivationToken } from "./accountActivationToken";
 
 // Reset password token
 export { IResetPasswordToken } from "./resetPasswordToken";
+
+// Custom request
+export * from "./customRequest";

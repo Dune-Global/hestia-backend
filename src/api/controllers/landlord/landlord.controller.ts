@@ -1,17 +1,23 @@
 import { Request, Response, NextFunction } from "express";
 import Landlord from "../../../models/landlord.model";
 import Property from "../../../models/property.model";
-import { ITransformedLandlord, ILandlordUpdateSuccess } from "../../../types";
+import {
+  ITransformedLandlord,
+  ILandlordUpdateSuccess,
+  AuthRequest,
+} from "../../../types";
 import APIError from "../../../errors/api-error";
 import httpStatus from "http-status";
+import { checkLandlordAuthorization } from "../../../utils/jwt-auth/chechAccountType";
 
 // Test auth
 export const testAuth = async (
-  _req: Request,
+  _req: AuthRequest,
   res: Response,
   next: NextFunction
 ) => {
   try {
+    console.log(_req.user?.accountType);
     res.json({
       message: "Access granted",
     });
@@ -53,11 +59,12 @@ export const getLandlordById = async (
 
 // Update additional details
 export const updateLandlordDetails = async (
-  req: Request,
+  req: AuthRequest,
   res: Response,
   next: NextFunction
 ): Promise<ILandlordUpdateSuccess> => {
   try {
+    checkLandlordAuthorization(req.user!);
     const updateFields = req.body;
     const landlord = await Landlord.get(req.params.landlordId);
 
@@ -97,11 +104,12 @@ export const updateLandlordDetails = async (
 
 // Update landlord password field
 export const updateLandlordPassword = async (
-  req: Request,
+  req: AuthRequest,
   res: Response,
   next: NextFunction
 ) => {
   try {
+    checkLandlordAuthorization(req.user!);
     const landlord = await Landlord.get(req.params.landlordId);
     const { oldPassword, newPassword } = req.body;
     if (landlord) {
@@ -146,11 +154,12 @@ export const updateLandlordPassword = async (
 
 // Delete landlord and its properties as well
 export const deleteLandlord = async (
-  req: Request,
+  req: AuthRequest,
   res: Response,
   next: NextFunction
 ) => {
   try {
+    checkLandlordAuthorization(req.user!);
     const { landlordId } = req.params;
 
     // Find and delete all properties associated with the landlord

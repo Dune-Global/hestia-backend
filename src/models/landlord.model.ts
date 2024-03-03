@@ -18,12 +18,18 @@ import {
   createAccessToken,
   createRefreshToken,
 } from "../utils/jwt-auth/generateToken";
+import { AccountTypes } from "../enums";
 const landlordSchema = new mongoose.Schema<
   ILandlord,
   ILandlordModel,
   ILandlordMethods
 >(
   {
+    accountType : {
+      type: String,
+      default: "landlord",
+      enum: Object.values(AccountTypes),
+    },
     firstName: {
       type: String,
       required: true,
@@ -111,6 +117,7 @@ landlordSchema.method({
     const transformed: Partial<ITransformedLandlord> = {};
     const fields: Array<keyof ITransformedLandlord> = [
       "_id",
+      "accountType",
       "firstName",
       "lastName",
       "userName",
@@ -189,6 +196,7 @@ landlordSchema.statics = {
             id: Landlord.id,
             email: Landlord.email,
             isEmailVerified: Landlord.isEmailVerified,
+            accountType: Landlord.accountType,
           });
 
           const refreshToken = createRefreshToken({

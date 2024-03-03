@@ -26,7 +26,7 @@ export const refresh = async (
     const result = decodedPayload(refreshToken);
 
     const doctorId: string = Object.values(result)[0];
-    const { email, isEmailVerified } = await Landlord.get(
+    const { email, isEmailVerified, accountType  } = await Landlord.get(
       doctorId
     );
 
@@ -34,6 +34,7 @@ export const refresh = async (
       id: doctorId,
       email: email,
       isEmailVerified: isEmailVerified,
+      accountType: accountType,
     });
 
     res.json({
