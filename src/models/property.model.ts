@@ -156,6 +156,8 @@ const propertySchema = new mongoose.Schema<
   propertyStatus: {
     type: String,
     enum: Object.values(PropertyStatus),
+    required: true,
+    default: PropertyStatus.PENDING,
   },
   availableGenders: {
     type: String,

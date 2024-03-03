@@ -38,6 +38,43 @@ export const listProperties = async (
   }
 };
 
+// Update a property and change the propertyStatus to "pending"
+export const updateProperty = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    checkLandlordAuthorization(req.user!);
+    const { propertyId } = req.params;
+
+    const updatedProperty = await Property.findByIdAndUpdate(
+      propertyId,
+      { propertyStatus: "pending", ...req.body },
+      { new: true }
+    );
+
+    if (!updatedProperty) {
+      throw new APIError({
+        message: "Property not found",
+        status: httpStatus.NOT_FOUND,
+        errors: [
+          {
+            field: "Property",
+            location: "params",
+            messages: [`Property with ID ${propertyId} does not exist`],
+          },
+        ],
+        stack: "",
+      });
+    }
+
+    res.json(updatedProperty.transform());
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Delete a property and delete the ID from the landlord's property list
 export const deleteProperty = async (
   req: AuthRequest,
