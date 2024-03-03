@@ -4,7 +4,11 @@ import Property from "../../../models/property.model";
 import Landlord from "../../../models/landlord.model";
 import httpStatus from "http-status";
 import { ITransformedProperty, AuthRequest } from "../../../types";
-import { checkLandlordAuthorization } from "../../../utils/jwt-auth/chechAccountType";
+import {
+  checkLandlordAuthorization,
+  checkWardenAuthorization,
+} from "../../../utils/jwt-auth/chechAccountType";
+import { PropertyStatus } from "../../../enums/property/propertyStatus";
 
 // Create a new property
 export const createProperty = async (
@@ -122,6 +126,50 @@ export const deleteProperty = async (
     landlord.properties.splice(index, 1);
     await landlord.save();
     res.json({ message: "Property deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Property find by ID and update the propertyStatus
+export const updatePropertyStatusByWarden = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    checkWardenAuthorization(req.user!);
+    const { propertyId } = req.params;
+    const { propertyStatus } = req.body;
+
+    if (!Object.values(PropertyStatus).includes(propertyStatus)) {
+      throw new APIError({
+        message: "Invalid property status",
+        status: httpStatus.BAD_REQUEST,
+        errors: [
+          {
+            field: "Property",
+            location: "body",
+            messages: [`Invalid property status: ${propertyStatus}`],
+          },
+        ],
+        stack: "",
+      });
+    }
+
+    const updatedProperty = await Property.findByIdAndUpdate(
+      propertyId,
+      { propertyStatus: propertyStatus },
+      { new: true }
+    );
+
+    if (!updatedProperty) {
+      res.status(404).json({
+        message: "Property not found",
+      });
+    }
+
+    res.json(updatedProperty);
   } catch (error) {
     next(error);
   }

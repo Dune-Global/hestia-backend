@@ -25,6 +25,14 @@ export {
   ITransformedProperty,
 } from "./property";
 
+export {
+  IWarden,
+  IWardenLoginRequest,
+  IWardenMethods,
+  IWardenModel,
+  IWardenSuccessLogin,
+} from "./warden";
+
 // JWT
 export { IAccessToken, IRefreshToken } from "./jwt";
 

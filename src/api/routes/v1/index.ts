@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import landlordRouter from "./landlord/landlord.route";
 import refreshRouter from "./common/refreshToken.route";
 import propertyRouter from "./property/property.route";
+import wardenRouter from "./warden/warden.route";
 import enumsRouter from "./common/enums.route";
 import fileServerRouter from "./common/fileService.route";
 const router = express.Router();
@@ -14,6 +15,7 @@ router.get("/tryme", (_req: Request, res: Response) => {
 // Plug the router into the express app
 router.use("/landlord", landlordRouter);
 router.use("/property", propertyRouter);
+router.use("/warden", wardenRouter);
 router.use("/token", refreshRouter);
 
 // common routes

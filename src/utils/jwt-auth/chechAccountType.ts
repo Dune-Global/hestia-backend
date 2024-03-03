@@ -18,3 +18,20 @@ export const checkLandlordAuthorization = (user: IAccessToken) => {
     });
   }
 };
+
+export const checkWardenAuthorization = (user: IAccessToken) => {
+  if (!user || user.accountType !== "warden") {
+    throw new APIError({
+      message: "Unauthorized",
+      status: httpStatus.UNAUTHORIZED,
+      errors: [
+        {
+          field: "Account Type",
+          location: "body",
+          messages: ["Unauthorized"],
+        },
+      ],
+      stack: "",
+    });
+  }
+};

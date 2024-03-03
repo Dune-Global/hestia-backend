@@ -1,7 +1,7 @@
 export interface IAccessToken {
   id: string;
   email: string;
-  isEmailVerified: boolean;
+  isEmailVerified?: boolean;
   accountType: string;
 }
 
