@@ -1,4 +1,6 @@
-export * from "./landlord/propertyType";
-export * from "./landlord/propertyStatus";
-export * from "./landlord/propertyAvailableGenders";
-export * from "./landlord/amenty";
+export * from "./property/propertyType";
+export * from "./property/propertyStatus";
+export * from "./property/propertyAvailableGenders";
+export * from "./property/amenty";
+
+export * from "./sriLankanProvinces";

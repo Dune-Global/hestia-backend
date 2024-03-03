@@ -7,6 +7,7 @@ import {
   PropertyAvailableGenders,
   PropertyStatus,
   PropertyType,
+  SriLankanProvinces,
 } from "../enums";
 import {
   IListProperty,
@@ -65,6 +66,7 @@ const propertySchema = new mongoose.Schema<
     },
     stateOrProvince: {
       type: String,
+      enum: Object.values(SriLankanProvinces),
       required: true,
     },
     postalCode: {

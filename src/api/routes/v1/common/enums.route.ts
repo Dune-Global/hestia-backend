@@ -4,6 +4,7 @@ import {
   getAllPropertyAvailableGenderEnums,
   getAllPropertyStatusEnums,
   getAllPropertyTypeEnums,
+  getAllSriLankanProvincesEnums,
 } from "../../../controllers/common/enums.contoller";
 
 const router = express.Router();
@@ -16,5 +17,6 @@ router.get(
 );
 router.get("/property-status-list", getAllPropertyStatusEnums);
 router.get("/property-type-list", getAllPropertyTypeEnums);
+router.get("/sri-lankan-provinces-list", getAllSriLankanProvincesEnums);
 
 export default router;

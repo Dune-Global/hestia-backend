@@ -4,6 +4,7 @@ import {
   PropertyAvailableGenders,
   PropertyStatus,
   PropertyType,
+  SriLankanProvinces,
 } from "../../../enums";
 
 // Get all the list of amenties
@@ -65,6 +66,23 @@ export const getAllPropertyTypeEnums = async (
 ) => {
   try {
     const enumValues = Object.values(PropertyType).filter(
+      (value) => typeof value === "string"
+    );
+
+    res.json(enumValues);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Get the list of all Sri Lankan provinces
+export const getAllSriLankanProvincesEnums = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const enumValues = Object.values(SriLankanProvinces).filter(
       (value) => typeof value === "string"
     );
 
