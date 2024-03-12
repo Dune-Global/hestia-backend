@@ -20,21 +20,39 @@ jobs:
     - run: yarn
     - name: Create .env file
       run: |
-        echo "ACCESS_TOKEN_EXPIRES_IN=${{ secrets.ACCESS_TOKEN_EXPIRES_IN }}" >> .env
-        echo "ACCESS_TOKEN_SECRET=${{ secrets.ACCESS_TOKEN_SECRET }}" >> .env
-        echo "ACCOUNT_ACTIVATION_TOKEN_EXPIRES_IN=${{ secrets.ACCOUNT_ACTIVATION_TOKEN_EXPIRES_IN }}" >> .env
-        echo "ACCOUNT_ACTIVATION_TOKEN_SECRET=${{ secrets.ACCOUNT_ACTIVATION_TOKEN_SECRET }}" >> .env
-        echo "AZURE_STORAGE_CONNECTION_STRING=${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" >> .env
-        echo "BLOB_CONTAINER_NAME=${{ secrets.BLOB_CONTAINER_NAME }}" >> .env
-        echo "BLOB_URL=${{ secrets.BLOB_URL }}" >> .env
-        echo "EMAIL_APP_PASSWORD=${{ secrets.EMAIL_APP_PASSWORD }}" >> .env
-        echo "EMAIL_USER=${{ secrets.EMAIL_USER }}" >> .env
-        echo "FRONTEND_URL=${{ secrets.FRONTEND_URL }}" >> .env
-        echo "MONGO_CONNECTION_STRING=${{ secrets.MONGO_CONNECTION_STRING }}" >> .env
-        echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
-        echo "PASSWORD_RESET_TOKEN_EXPIRES_IN=${{ secrets.PASSWORD_RESET_TOKEN_EXPIRES_IN }}" >> .env  
-        echo "PASSWORD_RESET_TOKEN_SECRET=${{ secrets.PASSWORD_RESET_TOKEN_SECRET }}" >> .env  
-        echo "PORT=${{ secrets.PORT }}" >> .env  
-        echo "REFRESH_TOKEN_EXPIRES_IN=${{ secrets.REFRESH_TOKEN_EXPIRES_IN }}" >> .env  
-        echo "REFRESH_TOKEN_SECRET=${{ secrets.REFRESH_TOKEN_SECRET }}" >> .env  
+        echo "ACCESS_TOKEN_EXPIRES_IN=${ACCESS_TOKEN_EXPIRES_IN}" >> .env
+        echo "ACCESS_TOKEN_SECRET=${ACCESS_TOKEN_SECRET}" >> .env
+        echo "ACCOUNT_ACTIVATION_TOKEN_EXPIRES_IN=${ACCOUNT_ACTIVATION_TOKEN_EXPIRES_IN}" >> .env
+        echo "ACCOUNT_ACTIVATION_TOKEN_SECRET=${ACCOUNT_ACTIVATION_TOKEN_SECRET}" >> .env
+        echo "AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}" >> .env
+        echo "BLOB_CONTAINER_NAME=${BLOB_CONTAINER_NAME}" >> .env
+        echo "BLOB_URL=${BLOB_URL}" >> .env
+        echo "EMAIL_APP_PASSWORD=${EMAIL_APP_PASSWORD}" >> .env
+        echo "EMAIL_USER=${EMAIL_USER}" >> .env
+        echo "FRONTEND_URL=${FRONTEND_URL}" >> .env
+        echo "MONGO_CONNECTION_STRING=${MONGO_CONNECTION_STRING}" >> .env
+        echo "NODE_ENV=${NODE_ENV}" >> .env
+        echo "PASSWORD_RESET_TOKEN_EXPIRES_IN=${PASSWORD_RESET_TOKEN_EXPIRES_IN}" >> .env  
+        echo "PASSWORD_RESET_TOKEN_SECRET=${PASSWORD_RESET_TOKEN_SECRET}" >> .env  
+        echo "PORT=${PORT}" >> .env  
+        echo "REFRESH_TOKEN_EXPIRES_IN=${REFRESH_TOKEN_EXPIRES_IN}" >> .env  
+        echo "REFRESH_TOKEN_SECRET=${REFRESH_TOKEN_SECRET}" >> .env  
+      env:
+        ACCESS_TOKEN_EXPIRES_IN: ${{ secrets.ACCESS_TOKEN_EXPIRES_IN }}
+        ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+        ACCOUNT_ACTIVATION_TOKEN_EXPIRES_IN: ${{ secrets.ACCOUNT_ACTIVATION_TOKEN_EXPIRES_IN }}
+        ACCOUNT_ACTIVATION_TOKEN_SECRET: ${{ secrets.ACCOUNT_ACTIVATION_TOKEN_SECRET }}
+        AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+        BLOB_CONTAINER_NAME: ${{ secrets.BLOB_CONTAINER_NAME }}
+        BLOB_URL: ${{ secrets.BLOB_URL }}
+        EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
+        EMAIL_USER: ${{ secrets.EMAIL_USER }}
+        FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
+        MONGO_CONNECTION_STRING: ${{ secrets.MONGO_CONNECTION_STRING }}
+        NODE_ENV: ${{ secrets.NODE_ENV }}
+        PASSWORD_RESET_TOKEN_EXPIRES_IN: ${{ secrets.PASSWORD_RESET_TOKEN_EXPIRES_IN }}
+        PASSWORD_RESET_TOKEN_SECRET: ${{ secrets.PASSWORD_RESET_TOKEN_SECRET }}
+        PORT: ${{ secrets.PORT }}
+        REFRESH_TOKEN_EXPIRES_IN: ${{ secrets.REFRESH_TOKEN_EXPIRES_IN }}
+        REFRESH_TOKEN_SECRET: ${{ secrets.REFRESH_TOKEN_SECRET }}
     - run: yarn test
